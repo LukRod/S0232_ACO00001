@@ -1,4 +1,4 @@
-tableextension 76100 ItemCardExt extends Item
+tableextension 76100 ItemCardACO extends Item
 {
     // ***
     // ABS001 INITSPEC LBR 29/11/2018 - [3.4 - New Fields Requirements] New object created
