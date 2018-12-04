@@ -12,12 +12,14 @@ tableextension 76100 ItemCardExt extends Item
             TableRelation = Location;
             CaptionML = ENU = 'Default Ship-from Location',
                         ENG = 'Default Ship-from Location';
+            Description = 'ABS001';
         }
         field(76101; "Sequence Line No. (ACO)"; Code[10])
         {
             DataClassification = ToBeClassified;
             CaptionML = ENU = 'Sequence Line No.',
                         ENG = 'Sequence Line No.';
+            Description = 'ABS001';
         }
         // field(76102; "Best before Date Calc."; Date)
         // {

@@ -11,6 +11,7 @@ tableextension 76101 ItemCrossRefExt extends "Item Cross Reference"
             DataClassification = ToBeClassified;
             CaptionML = ENU = 'Active',
                         ENG = 'Active';
+            Description = 'ABS001';
         }
     }
 
