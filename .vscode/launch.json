@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "al",
+            "request": "launch",
+            "name": "Your own server",
+            "server": "http://10.169.150.101",
+            "port": 7049,
+            "serverInstance": "Sansbury_Emmett_V11R05_DEV",
+            // Use it to recreate the whole schema (drop data)
+            //"schemaUpdateMode": "Recreate",
+            "tenant": "default",
+            "authentication": "Windows",
+            "startupObjectId": 22,
+            "startupObjectType": "Page",
+            "breakOnError": true
+        }
+    ]
+}

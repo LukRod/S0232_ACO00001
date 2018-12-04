@@ -1,0 +1,23 @@
+{
+  "id": "b94cf608-3e20-458f-9d19-4ffa5fc55e06",
+  "name": "ACO0001",
+  "publisher": "Acora",
+  "brief": "",
+  "description": "",
+  "version": "1.0.0.0",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "capabilities": [],
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "11.0.0.0",
+  "application": "11.0.0.0",
+  "idRange": {
+    "from": 76100,
+    "to": 76149
+  },
+  "runtime": "2.1"
+}
