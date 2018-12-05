@@ -4,7 +4,7 @@ pageextension 76113 SalesOrderListACO extends "Sales Order List"
     {
         addlast(Content)
         {
-            field("Wave (ACO)"; 'WaveACO')
+            field(WaveACO; "Wave (ACO)")
             {
                 ApplicationArea = All;
             }

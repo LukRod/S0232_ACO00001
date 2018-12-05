@@ -4,7 +4,7 @@ pageextension 76111 CustomerCardACO extends "Customer Card"
     {
         addlast(General)
         {
-            field("Exclude from Batch Posting (ACO)"; 'ExcludeFromBatchPostingACO')
+            field(ExcludeFromBatchPostingACO; "Exclude from Batch Posting (ACO)")
             {
                 ApplicationArea = All;
             }

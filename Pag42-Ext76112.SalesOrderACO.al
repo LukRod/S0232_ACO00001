@@ -4,7 +4,7 @@ pageextension 76112 SalesOrderCardACO extends "Sales Order"
     {
         addlast(General)
         {
-            field("Wave (ACO)"; 'WaveACO')
+            field(WaveACO; "Wave (ACO)")
             {
                 ApplicationArea = All;
             }
