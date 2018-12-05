@@ -722,4 +722,8 @@ page 76115 ProductLinesInfoMatrixACO
         ProductionForecastEntry: Record "Item";
     begin
     end;
+
+    local procedure QtyValidate(ColumnID: Integer);
+    begin
+    end;
 }
