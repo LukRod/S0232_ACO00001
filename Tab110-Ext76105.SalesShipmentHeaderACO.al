@@ -1,4 +1,4 @@
-tableextension 76103 SalesHeaderExt extends "Sales Header"
+tableextension 76105 SalesShipmentHeaderACO extends "Sales Shipment Header"
 {
     // ***
     // ABS001 INITSPEC LBR 29/11/2018 - [3.4 - New Fields Requirements] New object created
