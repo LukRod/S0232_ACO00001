@@ -643,7 +643,21 @@ page 76115 ProductLinesInfoMatrixACO
         Field1Visible := TRUE;
     end;
 
+    trigger OnAfterGetRecord();
     var
+        MATRIX_CurrentColumnOrdinal: Integer;
+    begin
+        MATRIX_CurrentColumnOrdinal := 0;
+        WHILE MATRIX_CurrentColumnOrdinal < MATRIX_NoOfMatrixColumns DO BEGIN
+            MATRIX_CurrentColumnOrdinal := MATRIX_CurrentColumnOrdinal + 1;
+            MATRIX_OnAfterGetRecord(MATRIX_CurrentColumnOrdinal);
+        END;
+        //IF (MATRIX_CurrentColumnOrdinal > 0) AND (QtyType = QtyType::"Net Change") THEN
+        //    SETRANGE("Date Filter", MatrixRecords[1]."Period Start", MatrixRecords[MATRIX_CurrentColumnOrdinal]."Period End");
+    end;
+
+    var
+        MatrixRecords: array[32] of Record ProductLinesInfoRecordsACO;
         MATRIX_NoOfMatrixColumns: Integer;
         MATRIX_CellData: array[32] of Decimal;
         MATRIX_CaptionSet: array[32] of Text[80];
@@ -717,13 +731,92 @@ page 76115 ProductLinesInfoMatrixACO
         [InDataSet]
         Field32Visible: Boolean;
 
+    procedure Load(MatrixColumns1: array[32] of Text[1024]; var MatrixRecords1: array[32] of Record ProductLinesInfoRecordsACO; OrderNoFilter1: Text; ShipToCityFilter1: Text; ShipmentDateFilter1: Text; LocationFilter1: Text; ItemNoFilter1: Text; NoOfMatrixColumns1: Integer);
+    begin
+        COPYARRAY(MATRIX_CaptionSet, MatrixColumns1, 1);
+        COPYARRAY(MatrixRecords, MatrixRecords1, 1);
+
+        OrderNoFilter := OrderNoFilter1;
+        ItemNoFilter := ItemNoFilter1;
+        ShipmentDateFilter := ShipmentDateFilter1;
+        LocationFilter := LocationFilter1;
+        ShipToCodeFilter := ShipToCityFilter1;
+
+        MATRIX_NoOfMatrixColumns := NoOfMatrixColumns1;
+
+        SetVisible;
+    end;
+
+    local procedure MATRIX_OnAfterGetRecord(ColumnOrdinal: Integer);
+    begin
+        IF OrderNoFilter <> '' THEN
+            SETFILTER("Document No. Filter (ACO)", OrderNoFilter)
+        ELSE
+            SETRANGE("Document No. Filter (ACO)");
+        IF ItemNoFilter <> '' THEN
+            SETFILTER("No.", ItemNoFilter)
+        ELSE
+            SETRANGE("No.");
+        IF LocationFilter <> '' THEN
+            SETFILTER("Location Filter", LocationFilter)
+        ELSE
+            SETRANGE("Location Filter");
+        IF ShipmentDateFilter <> '' THEN
+            SETFILTER("Date Filter", ShipmentDateFilter)
+        ELSE
+            SETRANGE("Date Filter");
+
+        SETFILTER("Ship-to Code Filter (ACO)", '@*' + MatrixRecords[ColumnOrdinal].Code + '*');
+
+        CALCFIELDS("Qty. on Sales Order (ACO)");
+        MATRIX_CellData[ColumnOrdinal] := "Qty. on Sales Order (ACO)";
+    end;
+
     local procedure MatrixOnDrillDown(ColumnID: Integer);
     var
-        ProductionForecastEntry: Record "Item";
+    //ProductionForecastEntry: Record "Item";
     begin
+        Error('MatrixOnDrillDown not supported!');
     end;
 
     local procedure QtyValidate(ColumnID: Integer);
     begin
+        Error('QtyValidate not supported!');
+    end;
+
+    procedure SetVisible();
+    begin
+        Field1Visible := MATRIX_CaptionSet[1] <> '';
+        Field2Visible := MATRIX_CaptionSet[2] <> '';
+        Field3Visible := MATRIX_CaptionSet[3] <> '';
+        Field4Visible := MATRIX_CaptionSet[4] <> '';
+        Field5Visible := MATRIX_CaptionSet[5] <> '';
+        Field6Visible := MATRIX_CaptionSet[6] <> '';
+        Field7Visible := MATRIX_CaptionSet[7] <> '';
+        Field8Visible := MATRIX_CaptionSet[8] <> '';
+        Field9Visible := MATRIX_CaptionSet[9] <> '';
+        Field10Visible := MATRIX_CaptionSet[10] <> '';
+        Field11Visible := MATRIX_CaptionSet[11] <> '';
+        Field12Visible := MATRIX_CaptionSet[12] <> '';
+        Field13Visible := MATRIX_CaptionSet[13] <> '';
+        Field14Visible := MATRIX_CaptionSet[14] <> '';
+        Field15Visible := MATRIX_CaptionSet[15] <> '';
+        Field16Visible := MATRIX_CaptionSet[16] <> '';
+        Field17Visible := MATRIX_CaptionSet[17] <> '';
+        Field18Visible := MATRIX_CaptionSet[18] <> '';
+        Field19Visible := MATRIX_CaptionSet[19] <> '';
+        Field20Visible := MATRIX_CaptionSet[20] <> '';
+        Field21Visible := MATRIX_CaptionSet[21] <> '';
+        Field22Visible := MATRIX_CaptionSet[22] <> '';
+        Field23Visible := MATRIX_CaptionSet[23] <> '';
+        Field24Visible := MATRIX_CaptionSet[24] <> '';
+        Field25Visible := MATRIX_CaptionSet[25] <> '';
+        Field26Visible := MATRIX_CaptionSet[26] <> '';
+        Field27Visible := MATRIX_CaptionSet[27] <> '';
+        Field28Visible := MATRIX_CaptionSet[28] <> '';
+        Field29Visible := MATRIX_CaptionSet[29] <> '';
+        Field30Visible := MATRIX_CaptionSet[30] <> '';
+        Field31Visible := MATRIX_CaptionSet[31] <> '';
+        Field32Visible := MATRIX_CaptionSet[32] <> '';
     end;
 }

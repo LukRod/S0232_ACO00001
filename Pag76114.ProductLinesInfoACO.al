@@ -17,11 +17,16 @@ page 76114 ProductLinesInfoACO
                     ApplicationArea = All;
                     CaptionML = ENU = 'Order No. Filter',
                                 ENG = 'Order No. Filter';
+
+                    trigger OnValidate();
+                    begin
+                        SetMatrix;
+                    end;
                 }
             }
-            part(Matrix; "Acc. Sched. Chart SubPage")
+            part(Matrix; "ProductLinesInfoMatrixACO")
             {
-
+                ApplicationArea = All;
             }
         }
     }
@@ -93,12 +98,41 @@ page 76114 ProductLinesInfoACO
         }
     }
 
+    trigger OnOpenPage()
     var
-        LocationFilter: Text;
+        myInt: Integer;
+    begin
+        SetColumns(SetWanted::First);
+    end;
+
+    var
+        MatrixRecords: array[32] of Record ProductLinesInfoRecordsACO;
         OrderNoFilter: Text;
+        ShipToCityFilter: Text;
         ShipmentDateFilter: Text;
-        ShipToCodeFilter: Text;
+        LocationFilter: Text;
         ItemNoFilter: Text;
+        MatrixColumnCaptions: ARRAY[32] OF Text[1024];
+        //ColumnSet: Text[1024];
+        SetWanted: Option First,Previous,Same,Next,PreviousColumn,NextColumn;
+        PKFirstRecInCurrSet: Text[100];
+        CurrSetLength: Integer;
 
+    procedure SetColumns(SetWanted: Option Initial,Previous,Same,Next,PreviousSet,NextSet);
+    var
+        MatrixMgt: Codeunit ProductLinesInfoMatrixMgt;
+    begin
+        MatrixMgt.GenerateOrderShipToMatrixData(SetWanted, ARRAYLEN(MatrixRecords), OrderNoFilter, ShipToCityFilter, ShipmentDateFilter,
+          LocationFilter, ItemNoFilter, PKFirstRecInCurrSet,
+          MatrixColumnCaptions, CurrSetLength, MatrixRecords);
+        SetMatrix;
+    end;
 
+    procedure SetMatrix();
+    begin
+        CurrPage.Matrix.PAGE.Load(
+          MatrixColumnCaptions, MatrixRecords, OrderNoFilter, ShipToCityFilter, ShipmentDateFilter,
+          LocationFilter, ItemNoFilter, CurrSetLength);
+        CurrPage.UPDATE(FALSE);
+    end;
 }

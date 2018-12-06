@@ -9,10 +9,10 @@
             "port": 7049,
             "serverInstance": "Sansbury_Emmett_V11R05_DEV",
             // Use it to recreate the whole schema (drop data)
-            //"schemaUpdateMode": "Recreate",
+            "schemaUpdateMode": "Recreate",
             "tenant": "default",
             "authentication": "Windows",
-            "startupObjectId": 22,
+            "startupObjectId": 76114,
             "startupObjectType": "Page",
             "breakOnError": true
         }

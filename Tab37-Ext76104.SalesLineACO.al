@@ -27,6 +27,16 @@ tableextension 76104 SalesLineACO extends "Sales Line"
                         ENG = 'Date / Time';
             Description = 'ABS001';
         }
+        field(76103; "Ship-to Code (ACO)"; Code[20])
+        {
+            //DataClassification = ToBeClassified;
+            CaptionML = ENU = 'Ship-to Code (ACO)',
+                        ENG = 'Ship-to Code (ACO)';
+            Description = 'ABS001';
+            FieldClass = FlowField;
+            CalcFormula = Lookup ("Sales Header"."Ship-to City" WHERE ("Document Type" = FIELD ("Document Type"), "No." = FIELD ("Document No.")));
+        }
+
     }
 
     var
